@@ -1,0 +1,14 @@
+[workspace]
+[package]
+version = "0.1.0"
+name = "revm-sp1-program"
+edition = "2021"
+
+[dependencies]
+sp1-derive = { git = "https://github.com/succinctlabs/sp1.git" }
+sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", branch = "main" }
+revm-precompile = { path = "../revm/crates/precompile", default-features = false, optional = true }
+hex = "0.4.3"
+
+[features]
+default = ["revm-precompile", "revm-precompile/std"]
