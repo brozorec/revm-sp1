@@ -120,10 +120,10 @@ pub fn new_g1_point(px: Fq, py: Fq) -> Result<G1, Error> {
     }
 }
 
-#[cfg(target_os = "zkvm")]
-extern "C" {
-    fn syscall_bn254_add(p: *mut u32, q: *const u32);
-}
+//#[cfg(target_os = "zkvm")]
+//extern "C" {
+    //fn syscall_bn254_add(p: *mut u32, q: *const u32);
+//}
 
 pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult {
     if gas_cost > gas_limit {
@@ -133,35 +133,36 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
     let input = right_pad::<ADD_INPUT_LEN>(input);
 
     let mut output = [0u8; 64];
-    cfg_if::cfg_if! {
-        if #[cfg(all(target_os = "zkvm"))] {
-            let mut p1 = [0u8; 64];
-            p1[..32].copy_from_slice(&input[32..64]);
-            p1[32..].copy_from_slice(&input[..32]);
-            p1.reverse();
+    //cfg_if::cfg_if! {
+        //if #[cfg(all(target_os = "zkvm"))] {
+            //let mut p1 = [0u8; 64];
+            //p1[..32].copy_from_slice(&input[32..64]);
+            //p1[32..].copy_from_slice(&input[..32]);
+            //p1.reverse();
 
-            let mut p2 = [0u8; 64];
-            p2[..32].copy_from_slice(&input[96..]);
-            p2[32..].copy_from_slice(&input[64..96]);
-            p2.reverse();
+            //let mut p2 = [0u8; 64];
+            //p2[..32].copy_from_slice(&input[96..]);
+            //p2[32..].copy_from_slice(&input[64..96]);
+            //p2.reverse();
 
-            unsafe {
-                syscall_bn254_add(p1.as_mut_ptr() as *mut u32, p2.as_ptr() as *const u32);
-            }
+            //unsafe {
+                //syscall_bn254_add(p1.as_mut_ptr() as *mut u32, p2.as_ptr() as *const u32);
+            //}
 
-            p1.reverse();
-            output[32..].copy_from_slice(&p1[..32]);
-            output[..32].copy_from_slice(&p1[32..]);
-        } else {
+            //p1.reverse();
+            //output[32..].copy_from_slice(&p1[..32]);
+            //output[..32].copy_from_slice(&p1[32..]);
+        //} else {
             let p1 = read_point(&input[..64])?;
             let p2 = read_point(&input[64..])?;
 
-            if let Some(sum) = AffineG1::from_jacobian(p1 + p2) {
+            let p = p1 + p2;
+            if let Some(sum) = AffineG1::from_jacobian(p) {
                 sum.x().to_big_endian(&mut output[..32]).unwrap();
                 sum.y().to_big_endian(&mut output[32..]).unwrap();
             }
-        }
-    }
+        //}
+    //}
     Ok((gas_cost, output.into()))
 }
 

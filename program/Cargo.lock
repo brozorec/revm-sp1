@@ -297,6 +297,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c3ac9f8b63eca6fd385229b3675f6cc0dc5c8a5c8a54a59d4f52ffd670d87b0c"
 
 [[package]]
+name = "bytemuck"
+version = "1.16.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "78834c15cb5d5efe3452d58b1e8ba890dd62d21907f867f383358198e56ebca5"
+
+[[package]]
 name = "byteorder"
 version = "1.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1024,7 +1030,6 @@ version = "7.0.0"
 dependencies = [
  "aurora-engine-modexp",
  "c-kzg",
- "cfg-if",
  "k256",
  "once_cell",
  "revm-primitives",
@@ -1323,10 +1328,10 @@ dependencies = [
 [[package]]
 name = "sp1-precompiles"
 version = "0.1.0"
-source = "git+https://github.com/succinctlabs/sp1.git?branch=main#f50fb1c3b11993fa926c128b1d38db7af969ef51"
 dependencies = [
  "anyhow",
  "bincode",
+ "bytemuck",
  "cfg-if",
  "getrandom",
  "hex",
@@ -1340,7 +1345,6 @@ dependencies = [
 [[package]]
 name = "sp1-zkvm"
 version = "0.1.0"
-source = "git+https://github.com/succinctlabs/sp1.git?branch=main#f50fb1c3b11993fa926c128b1d38db7af969ef51"
 dependencies = [
  "bincode",
  "cfg-if",
@@ -1379,11 +1383,11 @@ checksum = "a2eb9349b6444b326872e140eb1cf5e7c522154d69e7a0ffb0fb81c06b37543f"
 [[package]]
 name = "substrate-bn"
 version = "0.6.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "72b5bbfa79abbae15dd642ea8176a21a635ff3c00059961d1ea27ad04e5b441c"
 dependencies = [
+ "bytemuck",
  "byteorder",
  "crunchy",
+ "hex",
  "lazy_static",
  "rand",
  "rustc-hex",

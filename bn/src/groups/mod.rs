@@ -381,6 +381,12 @@ impl GroupParams for G1Params {
     fn one() -> G<Self> {
         G {
             x: Fq::one(),
+            //y: const_fq([
+                //2,
+                //0,
+                //0,
+                //0,
+            //]),
             y: const_fq([
                 0xa6ba871b8b1e1b3a,
                 0x14f1d651eb8e167b,
@@ -392,6 +398,7 @@ impl GroupParams for G1Params {
     }
 
     fn coeff_b() -> Fq {
+        //const_fq([3, 0, 0, 0])
         const_fq([
             0x7a17caa950ad28d7,
             0x1f6ac17ae15521b9,
@@ -418,12 +425,24 @@ impl GroupParams for G2Params {
     fn one() -> G<Self> {
         G {
             x: Fq2::new(
+                //const_fq([
+                    //0x46debd5cd992f6ed,
+                    //0x674322d4f75edadd,
+                    //0x426a00665e5c4479,
+                    //0x1800deef121f1e76,
+                //]),
                 const_fq([
                     0x8e83b5d102bc2026,
                     0xdceb1935497b0172,
                     0xfbb8264797811adf,
                     0x19573841af96503b,
                 ]),
+                //const_fq([
+                    //0x97e485b7aef312c2,
+                    //0xf1aa493335a9e712,
+                    //0x7260bfb731fb5d25,
+                    //0x198e9393920d483a,
+                //]),
                 const_fq([
                     0xafb4737da84c6140,
                     0x6043dd5a5802d8c4,
@@ -432,12 +451,24 @@ impl GroupParams for G2Params {
                 ]),
             ),
             y: Fq2::new(
+                //const_fq([
+                    //0x4ce6cc0166fa7daa,
+                    //0xe3d1e7690c43d37b,
+                    //0x4aab71808dcb408f,
+                    //0x12c85ea5db8c6deb,
+                //]),
                 const_fq([
                     0x619dfa9d886be9f6,
                     0xfe7fd297f59e9b78,
                     0xff9e1a62231b7dfe,
                     0x28fd7eebae9e4206,
                 ]),
+                //const_fq([
+                    //0x55acdadcd122975b,
+                    //0xbc4b313370b38ef3,
+                    //0xec9e99ad690c3395,
+                    //0x090689d0585ff075,
+                //]),
                 const_fq([
                     0x64095b56c71856ee,
                     0xdc57f922327d3cbb,
@@ -451,12 +482,24 @@ impl GroupParams for G2Params {
 
     fn coeff_b() -> Fq2 {
         Fq2::new(
+            //const_fq([
+                //0x3267e6dc24a138e5,
+                //0xb5b4c5e559dbefa3,
+                //0x81be18991be06ac3,
+                //0x2b149d40ceb8aaae,
+            //]),
             const_fq([
                 0x3bf938e377b802a8,
                 0x020b1b273633535d,
                 0x26b7edf049755260,
                 0x2514c6324384a86d,
             ]),
+            //const_fq([
+                //0xe4a2bd0685c315d2,
+                //0xa74fa084e52d1852,
+                //0xcd2cafadeed8fdf4,
+                //0x9713b03af0fed4,
+            //]),
             const_fq([
                 0x38e7ecccd1dcff67,
                 0x65f0b37d93ce0d3e,

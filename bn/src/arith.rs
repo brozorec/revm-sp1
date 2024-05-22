@@ -197,6 +197,18 @@ pub enum Error {
     InvalidLength { expected: usize, actual: usize },
 }
 
+#[cfg(target_os = "zkvm")]
+extern "C" {
+    /// The sp1 syscall for mulmod
+    fn sys_bigint(
+        result: *mut [u32; 8],
+        op: u32,
+        x: *const [u32; 8],
+        y: *const [u32; 8],
+        modulus: *const [u32; 8],
+    );
+}
+
 impl U256 {
     /// Initialize U256 from slice of bytes (big endian)
     pub fn from_slice(s: &[u8]) -> Result<U256, Error> {

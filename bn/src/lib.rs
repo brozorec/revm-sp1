@@ -1,4 +1,4 @@
-#![no_std]
+//#![no_std]
 
 extern crate alloc;
 
@@ -160,6 +160,7 @@ impl Fq {
     pub fn to_big_endian(&self, slice: &mut [u8]) -> Result<(), FieldError> {
         let mut a: arith::U256 = self.0.into();
         // convert from Montgomery representation
+        //#[cfg(not(target_os = "zkvm"))]
         a.mul(
             &fields::Fq::one().raw(),
             &fields::Fq::modulus(),
