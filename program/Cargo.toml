@@ -6,8 +6,8 @@ edition = "2021"
 
 [dependencies]
 sp1-derive = { git = "https://github.com/succinctlabs/sp1.git" }
-#sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", branch = "main" }
-sp1-zkvm = { path = "../../sp1-succinct/zkvm/entrypoint/" }
+sp1-zkvm = { git = "https://github.com/succinctlabs/sp1.git", branch = "main" }
+#sp1-zkvm = { path = "../../sp1-succinct/zkvm/entrypoint/" }
 revm-precompile = { path = "../revm/crates/precompile", default-features = false, optional = true }
 hex = "0.4.3"
 

@@ -1328,10 +1328,10 @@ dependencies = [
 [[package]]
 name = "sp1-precompiles"
 version = "0.1.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=main#ab0efc008737407e609439a4d362395bb2e325b1"
 dependencies = [
  "anyhow",
  "bincode",
- "bytemuck",
  "cfg-if",
  "getrandom",
  "hex",
@@ -1345,6 +1345,7 @@ dependencies = [
 [[package]]
 name = "sp1-zkvm"
 version = "0.1.0"
+source = "git+https://github.com/succinctlabs/sp1.git?branch=main#ab0efc008737407e609439a4d362395bb2e325b1"
 dependencies = [
  "bincode",
  "cfg-if",

@@ -156,7 +156,9 @@ pub fn run_add(input: &[u8], gas_cost: u64, gas_limit: u64) -> PrecompileResult 
             let p1 = read_point(&input[..64])?;
             let p2 = read_point(&input[64..])?;
 
+            println!("cycle-tracker-start: add");
             let p = p1 + p2;
+            println!("cycle-tracker-end: add");
             if let Some(sum) = AffineG1::from_jacobian(p) {
                 sum.x().to_big_endian(&mut output[..32]).unwrap();
                 sum.y().to_big_endian(&mut output[32..]).unwrap();

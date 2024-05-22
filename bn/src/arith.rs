@@ -310,6 +310,30 @@ impl U256 {
     /// Multiply `self` by `other` (mod `modulo`) via the Montgomery
     /// multiplication method.
     pub fn mul(&mut self, other: &U256, modulo: &U256, inv: u128) {
+        #[cfg(target_os = "zkvm")]
+        {
+            let mut result = [0u32; 8];
+            unsafe {
+                sys_bigint(
+                    result.as_mut_ptr() as *mut [u32; 8],
+                    0,
+                    self.0.as_ptr() as *const [u32; 8],
+                    other.0.as_ptr() as *const [u32; 8],
+                    modulo.0.as_ptr() as *const [u32; 8],
+                );
+            }
+            //let r = bytemuck::cast::<[u32; 8], [u8; 32]>(result);
+            //println!("result: {:?}", hex::encode(&r));
+
+            let mut r = bytemuck::cast::<[u32; 8], [u128; 2]>(result);
+            self.0.copy_from_slice(&r);
+
+            //mul_reduce(&mut self.0, &other.0, &modulo.0, inv);
+            //let mut fin = bytemuck::cast::<[u128; 2], [u8; 32]>(self.0);
+            //println!("fin: {:?}", hex::encode(&fin));
+        }
+
+        #[cfg(not(target_os = "zkvm"))]
         mul_reduce(&mut self.0, &other.0, &modulo.0, inv);
 
         if *self >= *modulo {

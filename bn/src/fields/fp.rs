@@ -13,7 +13,7 @@ macro_rules! field_impl {
         impl From<$name> for U256 {
             #[inline]
             fn from(mut a: $name) -> Self {
-                //#[cfg(not(target_os = "zkvm"))]
+                #[cfg(not(target_os = "zkvm"))]
                 a.0.mul(&U256::one(), &U256::from($modulus), $inv);
 
                 a.0
@@ -46,7 +46,7 @@ macro_rules! field_impl {
             /// Converts a U256 to an Fp so long as it's below the modulus.
             pub fn new(mut a: U256) -> Option<Self> {
                 if a < U256::from($modulus) {
-                    //#[cfg(not(target_os = "zkvm"))]
+                    #[cfg(not(target_os = "zkvm"))]
                     a.mul(&U256::from($rsquared), &U256::from($modulus), $inv);
 
                     Some($name(a))
@@ -57,7 +57,7 @@ macro_rules! field_impl {
 
             /// Converts a U256 to an Fr regardless of modulus.
             pub fn new_mul_factor(mut a: U256) -> Self {
-                //#[cfg(not(target_os = "zkvm"))]
+                #[cfg(not(target_os = "zkvm"))]
                 a.mul(&U256::from($rsquared), &U256::from($modulus), $inv);
 
                 $name(a)
@@ -115,7 +115,7 @@ macro_rules! field_impl {
                 } else {
                     self.0.invert(&U256::from($modulus));
 
-                    //#[cfg(not(target_os = "zkvm"))]
+                    #[cfg(not(target_os = "zkvm"))]
                     self.0.mul(&U256::from($rcubed), &U256::from($modulus), $inv);
 
                     Some(self)
@@ -218,18 +218,18 @@ field_impl!(
         0xef7f0b0c0ada0afb,
         0x20fd6e902d592544
     ],
-    //[
-        //1,
-        //0,
-        //0,
-        //0
-    //],
     [
-        0xd35d438dc58f0d9d,
-        0xa78eb28f5c70b3d,
-        0x666ea36f7879462c,
-        0xe0a77c19a07df2f
+        1,
+        0,
+        0,
+        0
     ],
+    //[
+        //0xd35d438dc58f0d9d,
+        //0xa78eb28f5c70b3d,
+        //0x666ea36f7879462c,
+        //0xe0a77c19a07df2f
+    //],
     0x9ede7d651eca6ac987d20782e4866389
 );
 
